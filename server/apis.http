@@ -1,0 +1,5 @@
+### Chèn dữ liệu vào bảng gồm có Roles, Categories, Options
+POST http://localhost:5000/api/insert/initdata
+
+###
+POST http://localhost:5000/api/insert/mockup

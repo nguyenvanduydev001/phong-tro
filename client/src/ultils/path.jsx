@@ -1,0 +1,25 @@
+const path = {
+  LAYOUT: "/",
+  INVALID: "*",
+  HOME: "/",
+  LOGIN: "/login",
+  ADMIN: "/admin",
+  MEMBER: "/member",
+  DASHBOARD: "dashboard",
+  MANAGE_POST_ALL: "quan-ly-tat-ca-tin-dang",
+  PERSONAL: "thong-tin-ca-nhan",
+  MANAGE_USER: "quan-ly-thanh-vien",
+  MANAGE_POST: "quan-ly-tin-dang",
+  CREATE_POST: "tao-moi-tin-dang",
+  CHOTHUEPHONGTRO: "Cho-thue-phong-tro",
+  CHOTHUECANHO: "Cho-thue-can-ho",
+  NHACHOTHUE: "Nha-cho-thue",
+  TIMOGHEP: "Tim-nguoi-o-ghep",
+  DETAIL_POST: "chi-tiet",
+  DETAIL_POST__PID__TITLE: "chi-tiet/:pid/:title/*",
+  FILTER: "tim-kiem",
+  MANAGE_EXPIRED: "quan-ly-gia-han",
+  WISHLIST: "danh-sach-tin-dang-yeu-thich",
+};
+
+export default path;

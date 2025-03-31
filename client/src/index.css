@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input.opt-input {
+  @apply h-16 border bg-gray-50;
+  width: 4rem !important;
+  margin: 0 1rem;
+}
+
+html,
+body {
+  height: 100%;
+}
+[contentEditable="true"]:empty:not(:focus):before {
+  content: attr(data-text);
+  font-size: 14px;
+  font-style: italic;
+  color: gray;
+}

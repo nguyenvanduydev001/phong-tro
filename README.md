@@ -128,4 +128,3 @@ Trong đó:
 
 - Chạy lệnh `npm install` để tại thư viện
 - Chạy lệnh `npm run dev` để chạy dự án
-# phong-tro
