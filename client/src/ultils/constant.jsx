@@ -12,7 +12,7 @@ import { MdOutlineAttachMoney } from "react-icons/md";
 import { RiShareForwardFill } from "react-icons/ri";
 
 export const text = {
-  image: "https://thuephongtro.com/images/support-bg.jpg",
+  image: "https://phongtro123.com/images/contact-us-pana-orange.svg",
   content: "Liên hệ với chúng tôi nếu bạn cần hỗ trợ:",
   contacts: [
     {

@@ -12,7 +12,7 @@
     "init": "npm run migrate:up && npm run seed:up"
   },
   "keywords": [],
-  "author": "hip06",
+  "author": "duy",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

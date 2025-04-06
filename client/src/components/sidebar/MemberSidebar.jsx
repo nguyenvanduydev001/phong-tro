@@ -6,6 +6,7 @@ import React, { Fragment, useState } from 'react'
 import { AiFillCaretRight, AiFillCaretDown, AiOutlineLogout } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import logo from "../../assets/logo-phongtro-removebg.png";
 
 
 const MemberSidebar = ({ dispatch }) => {
@@ -18,8 +19,7 @@ const MemberSidebar = ({ dispatch }) => {
     return (
         <div className='w-full min-h-screen'>
             <div className='py-12 pb-6 flex flex-col gap-1 justify-center items-center w-full'>
-                <img src="/logo.png" alt="" className='w-3/5 object-contain' />
-                <small className='text-sm font-medium text-blue-500 '>My workspace</small>
+                <img src={logo} alt="" className='w-3/5 object-contain' />
                 <div className='mt-4 flex flex-col items-center justify-center gap-1'>
                     <img src={current?.avatar || '/user.svg'} alt="avatar" className='w-24 h-24 rounded-full object-cover' />
                     <span className='text-main-red font-bold'>{current?.name}</span>

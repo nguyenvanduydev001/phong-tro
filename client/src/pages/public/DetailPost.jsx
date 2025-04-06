@@ -58,7 +58,7 @@ const DetailPost = ({ navigate, location }) => {
         </p>
       )}
       <div ref={dRef} className="text-main-blue my-4 text-sm">
-        Breadcrum
+        {/* Breadcrum */}
       </div>
       <div className="w-full grid grid-cols-10 gap-4">
         <div className="col-span-7 bg-white rounded-md border">

@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 
 const createNewPost = asyncHandler(async (req, res) => {
   const response = await db.Post.create({
-    ...req.body,
+    ...req.body, 
     expiredDate: Date.now() + process.env.DEFAULT_DAYS * 24 * 3600 * 1000,
   });
   return res.json({

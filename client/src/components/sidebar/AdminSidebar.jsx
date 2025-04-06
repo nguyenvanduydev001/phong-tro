@@ -18,7 +18,7 @@ const AdminSidebar = ({ dispatch }) => {
     return (
         <div className='w-full min-h-screen'>
             <div className='py-12 pb-6 flex flex-col gap-1 justify-center items-center w-full'>
-                <img src="/logo.png" alt="" className='w-3/5 object-contain' />
+                {/* <img src="/logo.png" alt="" className='w-3/5 object-contain' /> */}
                 <small className='text-sm font-medium text-red-500 '>Admin workspace</small>
                 <div className='mt-4 flex flex-col items-center justify-center gap-1'>
                     <img src={current?.avatar || '/user.svg'} alt="avatar" className='w-24 h-24 rounded-full object-cover' />
