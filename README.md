@@ -128,3 +128,21 @@ Trong đó:
 
 - Chạy lệnh `npm install` để tại thư viện
 - Chạy lệnh `npm run dev` để chạy dự án
+
+### Chia nhiệm vụ vấn đáp
+1. Post Management Module (Duy)
+- Tạo/Sửa/Xóa bài đăng
+- Xem chi tiết phòng trọ
+- Upload hình ảnh
+2. Search & Filter Module (Giáp)
+- Tìm kiếm phòng trọ
+- Bộ lọc (giá, diện tích, địa chỉ)
+- Sắp xếp kết quả
+3. User Interaction Module (Uy)
+- Comments
+- Ratings
+- Bookmarks/Saves
+4. Admin Dashboard Module (Phong)
+- Quản lý người dùng
+- Quản lý bài đăng
+- Thống kê và báo cáo
