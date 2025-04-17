@@ -16,7 +16,7 @@ router.post(
       description: stringReq,
       price: numberReq,
       postedBy: numberReq,
-      target: stringReq,
+      target: stringReq, 
       images: arrayReq,
       area: numberReq,
     })

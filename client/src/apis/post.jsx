@@ -4,7 +4,7 @@ export const apiCreateNewPost = (data) =>
   axios({
     method: "post",
     url: "/post/new",
-    data,
+    data, 
   })
 export const apiGetPosts = (params) =>
   axios({

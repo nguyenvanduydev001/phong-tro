@@ -1,5 +1,5 @@
 import { Button, InputFile, InputForm, Map, Select, TextField, Title } from "@/components"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import withBaseTopping from "@/hocs/withBaseTopping"
 import { useSelector } from "react-redux"
@@ -23,7 +23,6 @@ const CreatePost = () => {
 
   const [districts, setDistricts] = useState([])
   const [wards, setWards] = useState([])
-  const [center, setCenter] = useState(null)
   const [zoom, setZoom] = useState(10)
   const [isLoading, setIsLoading] = useState(false)
 

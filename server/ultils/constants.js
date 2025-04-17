@@ -1,11 +1,12 @@
-const chothuecanho = require("../data/chothuecanho.json")
-const nhachotue = require("../data/nhachothue.json")
-const chothuephongtro = require("../data/chothuephongtro.json")
-const bcrypt = require("bcryptjs")
-const slugify = require("slugify")
+const chothuecanho = require("../data/chothuecanho.json");
+const nhachotue = require("../data/nhachothue.json");
+const chothuephongtro = require("../data/chothuephongtro.json");
+const bcrypt = require("bcryptjs");
+const slugify = require("slugify");
 
-const hashPassword = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-const DEFAULT_DAYS = 5
+const hashPassword = (password) =>
+  bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+const DEFAULT_DAYS = 3650;
 const chothuecanhodata = chothuecanho.body.map((el, idx) => ({
   images: JSON.stringify(el.images),
   title: el.header.title,
@@ -20,7 +21,7 @@ const chothuecanhodata = chothuecanho.body.map((el, idx) => ({
   expiredDate: new Date(Date.now() + DEFAULT_DAYS * 24 * 3600 * 1000),
   createdAt: new Date(),
   updatedAt: new Date(),
-}))
+}));
 const chothuephongtrodata = chothuephongtro.body.map((el, idx) => ({
   images: JSON.stringify(el.images),
   title: el.header.title,
@@ -35,7 +36,7 @@ const chothuephongtrodata = chothuephongtro.body.map((el, idx) => ({
   expiredDate: new Date(Date.now() + DEFAULT_DAYS * 24 * 3600 * 1000),
   createdAt: new Date(),
   updatedAt: new Date(),
-}))
+}));
 const nhachotuedata = nhachotue.body.map((el, idx) => ({
   images: JSON.stringify(el.images),
   title: el.header.title,
@@ -50,10 +51,17 @@ const nhachotuedata = nhachotue.body.map((el, idx) => ({
   expiredDate: new Date(Date.now() + DEFAULT_DAYS * 24 * 3600 * 1000),
   createdAt: new Date(),
   updatedAt: new Date(),
-}))
+}));
 
-exports.postData = [].concat(chothuecanhodata).concat(chothuephongtrodata).concat(nhachotuedata)
-exports.userData = [...chothuecanho.body, ...nhachotue.body, ...chothuephongtro.body]
+exports.postData = []
+  .concat(chothuecanhodata)
+  .concat(chothuephongtrodata)
+  .concat(nhachotuedata);
+exports.userData = [
+  ...chothuecanho.body,
+  ...nhachotue.body,
+  ...chothuephongtro.body,
+]
   .map((el) => ({
     name: el.contact?.content[0]?.content,
     phone: el.contact?.content[1]?.content,
@@ -61,7 +69,9 @@ exports.userData = [...chothuecanho.body, ...nhachotue.body, ...chothuephongtro.
     createdAt: new Date(),
     updatedAt: new Date(),
   }))
-  .filter((el, idx, self) => idx === self.findIndex((u) => u.phone === el.phone))
+  .filter(
+    (el, idx, self) => idx === self.findIndex((u) => u.phone === el.phone)
+  );
 
 exports.priceOptions = [
   {
@@ -128,7 +138,7 @@ exports.priceOptions = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
-]
+];
 exports.areaOptions = [
   {
     value: "Dưới 20 m²",
@@ -178,7 +188,7 @@ exports.areaOptions = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
-]
+];
 exports.roles = [
   {
     code: "1010",
@@ -192,7 +202,7 @@ exports.roles = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
-]
+];
 exports.categories = [
   {
     text: "Cho Thuê Phòng Trọ, Giá Rẻ, Tiện Nghi, Mới Nhất 2023",
@@ -230,4 +240,4 @@ exports.categories = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
-]
+];
