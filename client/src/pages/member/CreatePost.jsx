@@ -1,14 +1,25 @@
-import { Button, InputFile, InputForm, Map, Select, TextField, Title } from "@/components"
-import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
-import withBaseTopping from "@/hocs/withBaseTopping"
-import { useSelector } from "react-redux"
-import { targets } from "@/ultils/constant"
-import clsx from "clsx"
-import useDebounce from "@/hooks/useDebounce"
-import { apiCreateNewPost } from "@/apis/post"
-import { toast } from "react-toastify"
-import { apiGetDistrictsFromProvinceId, apiGetWardsFromDistrictId } from "@/apis/app"
+import {
+  Button,
+  InputFile,
+  InputForm,
+  Map,
+  Select,
+  TextField,
+  Title,
+} from "@/components";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import withBaseTopping from "@/hocs/withBaseTopping";
+import { useSelector } from "react-redux";
+import { targets } from "@/ultils/constant";
+import clsx from "clsx";
+import useDebounce from "@/hooks/useDebounce";
+import { apiCreateNewPost } from "@/apis/post";
+import { toast } from "react-toastify";
+import {
+  apiGetDistrictsFromProvinceId,
+  apiGetWardsFromDistrictId,
+} from "@/apis/app";
 
 const CreatePost = () => {
   const {
@@ -17,60 +28,66 @@ const CreatePost = () => {
     watch,
     register,
     reset,
-  } = useForm()
-  const { datavn, categories } = useSelector((state) => state.app)
-  const { current } = useSelector((state) => state.user)
+  } = useForm();
+  const { datavn, categories } = useSelector((state) => state.app);
+  const { current } = useSelector((state) => state.user);
 
-  const [districts, setDistricts] = useState([])
-  const [wards, setWards] = useState([])
-  const [zoom, setZoom] = useState(10)
-  const [isLoading, setIsLoading] = useState(false)
+  const [districts, setDistricts] = useState([]);
+  const [wards, setWards] = useState([]);
+  const [zoom, setZoom] = useState(10);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const province = watch("province")
-  const district = watch("district")
-  const ward = watch("ward")
-  const category = watch("category")
-  const images = watch("images")
-  const address = watch("address")
-  const street = watch("street")
-  const title = watch("title")
-  const price = watch("price")
-  const area = watch("area")
-  const target = watch("target")
-  const description = watch("description")
+  const province = watch("province");
+  const district = watch("district");
+  const ward = watch("ward");
+  const category = watch("category");
+  const images = watch("images");
+  const address = watch("address");
+  const street = watch("street");
+  const title = watch("title");
+  const price = watch("price");
+  const area = watch("area");
+  const target = watch("target");
+  const description = watch("description");
   const setCustomValue = (id, val) =>
-    setValue(id, val, { shouldDirty: true, shouldTouch: true, shouldValidate: true })
+    setValue(id, val, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
   useEffect(() => {
     if (province) {
-      setCustomValue("district", "")
-      setCustomValue("ward", "")
-      setCustomValue("street", "")
+      setCustomValue("district", "");
+      setCustomValue("ward", "");
+      setCustomValue("street", "");
       const fetchDistricts = async () => {
-        const response = await apiGetDistrictsFromProvinceId(province.idProvince)
-        if (response.status === 200) setDistricts(response.data)
-      }
-      fetchDistricts()
+        const response = await apiGetDistrictsFromProvinceId(
+          province.idProvince
+        );
+        if (response.status === 200) setDistricts(response.data);
+      };
+      fetchDistricts();
     }
-  }, [province])
+  }, [province]);
   useEffect(() => {
     if (district) {
       const fetchWards = async () => {
-        const response = await apiGetWardsFromDistrictId(district.idDistrict)
-        if (response.status === 200) setWards(response.data)
-      }
-      fetchWards()
+        const response = await apiGetWardsFromDistrictId(district.idDistrict);
+        if (response.status === 200) setWards(response.data);
+      };
+      fetchWards();
     }
-  }, [district])
-  const debounceValue = useDebounce(street, 800)
+  }, [district]);
+  const debounceValue = useDebounce(street, 800);
   useEffect(() => {
     const lengthAddress = Object.values({
       province: province?.name,
       street,
       ward: ward?.name,
       district: district?.name,
-    }).filter((el) => !el === false).length
-    if (lengthAddress > 2) setZoom(14)
-    else setZoom(12)
+    }).filter((el) => !el === false).length;
+    if (lengthAddress > 2) setZoom(14);
+    else setZoom(12);
     const text = clsx(
       debounceValue,
       debounceValue && ",",
@@ -79,13 +96,13 @@ const CreatePost = () => {
       district?.name,
       district?.name && ",",
       province?.name
-    )
+    );
     const textModified = text
       ?.split(",")
       ?.map((el) => el.trim())
-      ?.join(", ")
-    setCustomValue("address", textModified)
-  }, [province, district, ward, debounceValue])
+      ?.join(", ");
+    setCustomValue("address", textModified);
+  }, [province, district, ward, debounceValue]);
 
   // Handle Submit Form
   const handleSubmit = async () => {
@@ -99,18 +116,18 @@ const CreatePost = () => {
       description,
       postedBy: current?.id,
       address,
-    }
-    setIsLoading(true)
-    const response = await apiCreateNewPost(payload)
-    setIsLoading(false)
+    };
+    setIsLoading(true);
+    const response = await apiCreateNewPost(payload);
+    setIsLoading(false);
     if (response.success) {
-      reset()
-      setCustomValue("price", 0)
-      setCustomValue("area", 0)
-      setCustomValue("description", "")
-      toast.success(response.mes)
-    } else toast.error(response.mes)
-  }
+      reset();
+      setCustomValue("price", 0);
+      setCustomValue("area", 0);
+      setCustomValue("description", "");
+      toast.success(response.mes);
+    } else toast.error(response.mes);
+  };
   return (
     <section className="pb-[200px]">
       <Title title="Tạo mới tin đăng">
@@ -120,7 +137,9 @@ const CreatePost = () => {
       </Title>
       <section className="p-4 grid grid-cols-12 gap-6">
         <div className="col-span-8">
-          <h1 className="text-lg font-semibold  text-main-blue">1. Địa chỉ cho thuê</h1>
+          <h1 className="text-lg font-semibold  text-main-blue">
+            1. Địa chỉ cho thuê
+          </h1>
           <div className="grid grid-cols-3 gap-4 mt-6">
             <Select
               options={datavn?.map((el) => ({
@@ -182,7 +201,9 @@ const CreatePost = () => {
               value={address}
             />
           </div>
-          <h1 className="text-lg font-semibold mt-6 text-main-blue">2. Thông tin mô tả</h1>
+          <h1 className="text-lg font-semibold mt-6 text-main-blue">
+            2. Thông tin mô tả
+          </h1>
           <div className="mt-6 relative z-10">
             <Select
               options={categories?.map((el) => ({
@@ -290,25 +311,30 @@ const CreatePost = () => {
           <div className="flex flex-col p-4 text-sm gap-2 rounded-md bg-orange-100 border border-orange-500 text-orange-600">
             <h3 className="font-medium">Lưu ý khi đăng tin</h3>
             <ul className="list-item pl-8">
-              <li className="list-disc">Nội dung phải viết bằng tiếng Việt có dấu</li>
+              <li className="list-disc">
+                Nội dung phải viết bằng tiếng Việt có dấu
+              </li>
               <li className="list-disc">Tiêu đề tin không dài quá 100 kí tự</li>
               <li className="list-disc">
-                Các bạn nên điền đầy đủ thông tin vào các mục để tin đăng có hiệu quả hơn.
+                Các bạn nên điền đầy đủ thông tin vào các mục để tin đăng có
+                hiệu quả hơn.
               </li>
               <li className="list-disc">
-                Để tăng độ tin cậy và tin rao được nhiều người quan tâm hơn, hãy sửa vị trí tin rao của bạn
-                trên bản đồ bằng cách kéo icon tới đúng vị trí của tin rao.
+                Để tăng độ tin cậy và tin rao được nhiều người quan tâm hơn, hãy
+                sửa vị trí tin rao của bạn trên bản đồ bằng cách kéo icon tới
+                đúng vị trí của tin rao.
               </li>
               <li className="list-disc">
-                Tin đăng có hình ảnh rõ ràng sẽ được xem và gọi gấp nhiều lần so với tin rao không có ảnh. Hãy
-                đăng ảnh để được giao dịch nhanh chóng!
+                Tin đăng có hình ảnh rõ ràng sẽ được xem và gọi gấp nhiều lần so
+                với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh
+                chóng!
               </li>
             </ul>
           </div>
         </div>
       </section>
     </section>
-  )
-}
+  );
+};
 
-export default withBaseTopping(CreatePost)
+export default withBaseTopping(CreatePost);
